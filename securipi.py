@@ -29,7 +29,7 @@ def disarm_security(channel):
 def setup():
     rpin.init();
     rpin.set_button_callback('B_ARM',arm_security)
-    rpin.set_button_callback('B_DISARM',arm_security)
+    rpin.set_button_callback('B_DISARM',disarm_security)
     rpin.set_button_callback('B_ALARM',triger_alarm)
 
 def demo():
