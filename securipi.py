@@ -1,5 +1,6 @@
 import RPI_GPIO as rpin
 import time
+import pygame.mixer as playback
 
 is_armed = False
 move_lvl = 0
@@ -10,10 +11,12 @@ is_alarm = False
 def triger_alarm(channel):
     is_alarm = True
     rpin.write('D_ALARM',True)
+    playback.music.play(-1)
 
 def stop_alarm():
     is_alarm = False
     rpin.write('D_ALARM',False)
+    playback.music.stop()
 
 def arm_security(channel):
     is_armed = True
@@ -31,6 +34,8 @@ def setup():
     rpin.set_button_callback('B_ARM',arm_security)
     rpin.set_button_callback('B_DISARM',disarm_security)
     rpin.set_button_callback('B_ALARM',triger_alarm)
+    playback.init()
+    playback.music.load("siren.mp3")
 
 def demo():
     rpin.write('D_TOKEN',False)

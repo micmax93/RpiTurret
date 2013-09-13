@@ -18,13 +18,14 @@ pinout = {
 	#17 : {'name': '3V3 Power' , 'mode' : ''},
 	#18 : {'name': 'GPIO 24' , 'mode' : ''},
 	#19 : {'name': 'GPIO 10' , 'mode' : ''},
+	26 : {'name': 'B_ALARM' , 'mode' : 'button'},
+
 	#20 : {'name': 'GND' , 'mode' : ''},
 	#21 : {'name': 'GPIO 9' , 'mode' : ''},
 	22 : {'name': 'B_ARM' , 'mode' : 'button'},
 	#23 : {'name': 'GPIO 11' , 'mode' : ''},
-	24 : {'name': 'B_DISARM' , 'mode' : 'button'},
+	24 : {'name': 'B_DISARM' , 'mode' : 'button'}
 	#25 : {'name': 'GND' , 'mode' : ''},
-	26 : {'name': 'B_ALARM' , 'mode' : 'button'}
 }
 pwm_freq = 50
 button_bounce = 200
