@@ -1,0 +1,9 @@
+#!/bin/bash
+echo "Wybierz kod:"
+select kod in $(lsusb | awk '{print $6}')
+do
+	echo $kod >> usb-authorized-list
+	exit 0
+done
+
+

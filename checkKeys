@@ -1,0 +1,13 @@
+#!/bin/sh
+	newDevices=$(lsusb | awk '{print $6}')
+	for device in $newDevices
+	do
+		if grep -q $device usb-authorized-list
+			then
+				exit 0
+			fi
+	done
+	exit 1
+
+
+
