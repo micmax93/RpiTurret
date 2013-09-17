@@ -37,6 +37,8 @@ def setup():
     rpin.set_button_callback('B_ALARM',triger_alarm)
     playback.init()
     playback.music.load("siren.mp3")
+    rpin.pwm_set('PWM_MOVEMENT',active=True, duty_cycle=0)
+    rpin.pwm_set('PWM_NOISE',active=True, duty_cycle=0)
 
 def demo():
     rpin.write('D_TOKEN',False)
