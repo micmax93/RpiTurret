@@ -13,19 +13,19 @@ class Main:
     referencedImage = None
     capture = None
     frameSize = None
-    windowNameDiff = "Camera capture diff"
-    windowNameReference = "Camera capture reference"
-    windowCurrent = "Camera capture current"
+    #windowNameDiff = "Camera capture diff"
+    #windowNameReference = "Camera capture reference"
+    #windowCurrent = "Camera capture current"
 
     def __init__(self):
         #init camera
         self.capture = cv.CaptureFromCAM(0)
-        cv.NamedWindow(self.windowNameReference, 1)
-        cv.NamedWindow(self.windowCurrent, 1)
-        cv.NamedWindow(self.windowNameDiff, 1)
-        cv.MoveWindow(self.windowNameReference, 50, 50)
-        cv.MoveWindow(self.windowCurrent, 500, 600)
-        cv.MoveWindow(self.windowNameDiff, 1000, 50)
+        # cv.NamedWindow(self.windowNameReference, 1)
+        # cv.NamedWindow(self.windowCurrent, 1)
+        # cv.NamedWindow(self.windowNameDiff, 1)
+        # cv.MoveWindow(self.windowNameReference, 50, 50)
+        # cv.MoveWindow(self.windowCurrent, 500, 600)
+        # cv.MoveWindow(self.windowNameDiff, 1000, 50)
         self.captureReferenceImage()
 
     def getFrame(self):
@@ -50,9 +50,9 @@ class Main:
             motionDetected = self.isMotionDetected(diff)
             print motionDetected
 
-            cv.ShowImage(self.windowCurrent, currentFrame)
-            cv.ShowImage(self.windowNameReference, self.referencedImage)
-            cv.ShowImage(self.windowNameDiff, diff)
+            # cv.ShowImage(self.windowCurrent, currentFrame)
+            # cv.ShowImage(self.windowNameReference, self.referencedImage)
+            # cv.ShowImage(self.windowNameDiff, diff)
 
             # Listen for ESC key
             c = cv.WaitKey(7) % 0x100
@@ -82,6 +82,7 @@ class Main:
         # get average color array for whole image
         avg = cv.Avg(diff)
         #it's grey so we only need first channel
+        #return avg[0]
         return avg[0] > 0.25
 
 
