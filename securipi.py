@@ -1,6 +1,7 @@
 import RPI_GPIO as rpin
 import time
 import pygame.mixer as playback
+from single_server import Host
 
 is_armed = False
 move_lvl = 0
@@ -52,3 +53,16 @@ def demo():
     rpin.pwm_set('PWM_MOVEMENT',active=False)
     rpin.pwm_set('PWM_NOISE',active=False)
     rpin.write('D_TOKEN',False)
+
+def refresh():
+    rpin.pwm_set('PWM_MOVEMENT', duty_cycle=move_lvl)
+    rpin.pwm_set('PWM_NOISE', duty_cycle=noise_lvl)
+
+setup()
+h = Host(5555)
+h.start()
+while 1:
+    noise_lvl = h.get_noise()
+    move_lvl = h.get_noise()
+    refresh()
+    time.sleep(0.5)
