@@ -49,9 +49,10 @@ class SecuriPi:
         rpin.write('D_DISARMED', False)
 
     def trigger_alarm(self):
-        self.is_alarm = True
-        rpin.write('D_ALARM', True)
-        playback.music.play(-1)
+        if not self.is_alarm:
+            self.is_alarm = True
+            rpin.write('D_ALARM', True)
+            playback.music.play(-1)
 
     def stop_alarm(self):
         self.is_alarm = False
