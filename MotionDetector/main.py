@@ -5,7 +5,7 @@ import time
 class TimeUtil:
     @staticmethod
     def getCurrentTime():
-        return int(time.time() * 1000)
+        return int(round(time.time() * 1000))
 
 
 class Main:
@@ -30,23 +30,17 @@ class Main:
         self.lastReferenceCaptureTime = TimeUtil.getCurrentTime()
 
     def run(self):
-
-        for i in range(500):
-            time.sleep(1)
-
+        while 1:
             currentFrame = self.getFrame()
-
-            # if i % 2 == 0:
             if self.isReferenceUpdateTime():
                 self.captureReferenceImage()
-
             diff = self.getDiff(cv.CloneImage(currentFrame))
             motionDetected = self.isMotionDetected(diff)
             print motionDetected
 
     def isReferenceUpdateTime(self):
         #capture reference img every 5 secs
-        return TimeUtil.getCurrentTime() - self.lastReferenceCaptureTime > 1
+        return TimeUtil.getCurrentTime() - self.lastReferenceCaptureTime > 500
 
     def getDiff(self, frame):
         diffImg = cv.CloneImage(self.referencedImage)
@@ -64,11 +58,9 @@ class Main:
         return greyImg
 
     def isMotionDetected(self, diff):
-        # get average color array for whole image
         avg = cv.Avg(diff)
-        #it's grey so we only need first channel
-        #return avg[0]
-        return avg[0] > 20
+        return avg[0]
+        #return avg[0] > 20
 
 if __name__ == "__main__":
     t = Main()

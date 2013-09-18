@@ -43,6 +43,19 @@ def read(pin_name):
     return GPIO.input(_try_get(_output_mapping, pin_name))
 
 
+def get_pin_name(channel):
+    for key, value in _input_mapping.iteritems():
+        if value == channel:
+            return key
+    for key, value in _output_mapping.iteritems():
+        if value == channel:
+            return key
+    for key, value in _pwm_mapping.iteritems():
+        if value == channel:
+            return key
+    return None
+
+
 def is_button_pressed(pin_name):
     return not GPIO.input(_try_get(_input_mapping, pin_name))
 

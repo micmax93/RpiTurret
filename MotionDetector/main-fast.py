@@ -30,7 +30,8 @@ class MovementDetector:
                 diffImg = cv.CloneImage(self.previous)
                 cv.AbsDiff(self.previous, self.current, diffImg)
                 avg = cv.Avg(diffImg)
-                print "\t" + str(avg[0] > 5)
+                #print "\t" + str(avg[0] > 5)
+                print "\t" + str(avg[0])
 
                 self.previous = cv.CloneImage(self.current)
                 self.lastTime = time.time()

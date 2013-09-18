@@ -1,7 +1,7 @@
-# Echo server program
 import socket
 import json
 from threading import Thread
+
 
 class Accumulator:
     value_list = [0]
@@ -28,36 +28,39 @@ class Accumulator:
         if self.type == 'sum':
             return sum
         elif self.type == 'avg':
-            return sum / self.max_count
+            return sum / len(self.value_list)
+
+
+def empty_callback(alarm, move, noise):
+    pass
 
 
 class Host:
     socket = None
     movement = Accumulator(10)
     noise = Accumulator(10)
-    conn = None
-    addr = ''
+    update_callback = empty_callback
 
     def __init__(self, port):
         self.socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         self.socket.bind(('127.0.0.1', port))
         self.socket.listen(10)
 
-    def client_loop(self):
+    def client_loop(self, conn, addr):
         while 1:
-            data = self.conn.recv(1024)
+            data = conn.recv(1024)
             if not data: break
             tab = json.loads(data)
             self.noise.add_item(tab['noise'])
             self.movement.add_item(tab['movement'])
-        print "Client ", self.addr, " disconnected"
+            self.update_callback(tab['alarm'], self.movement.get_value(), self.noise.get_value())
+        print "Client ", addr, " disconnected"
 
     def start(self):
-        conn, addr = self.socket.accept()
-        print 'Connected by', addr
-        self.conn = conn
-        self.addr = addr
-        Thread(target=self.client_loop).start()
+        while True:
+            conn, addr = self.socket.accept()
+            print 'Connected by', addr
+            Thread(target=self.client_loop, args=(conn, addr)).start()
 
     def get_movement(self):
         return self.movement.get_value()
@@ -65,5 +68,10 @@ class Host:
     def get_noise(self):
         return self.noise.get_value()
 
+    def is_alarmed(self):
+        return self.noise.get_value()
+
+    def set_update_callback(self, callback):
+        self.update_callback = callback
 
 #Host(5555).accept_loop()
