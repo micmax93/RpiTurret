@@ -5,9 +5,9 @@ import UsbToken.validation as token
 s = SecuriPi()
 s.setup()
 s.token_callback = token.is_valid_token
-h = Host(5555)
-h.set_update_callback(s.update)
+
 try:
-    h.start()
+    while True:
+        s.update(alarm=False,mov_lvl=0,noise_lvl=0)
 except KeyboardInterrupt:
     pass
