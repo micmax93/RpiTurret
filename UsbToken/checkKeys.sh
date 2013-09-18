@@ -2,7 +2,7 @@
 	newDevices=$(lsusb | awk '{print $6}')
 	for device in $newDevices
 	do
-		if grep -q $device usb-authorized-list
+		if grep -q $device UsbToken/usb-authorized-list
 			then
 				#echo 1
 				exit 0
