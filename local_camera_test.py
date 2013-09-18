@@ -6,12 +6,6 @@ fmd = FastMovementDetector()
 startTime = time.time()
 
 try:
-
-    while time.time() - startTime < 5:
-        fmd.tryToDetect()
-
-    print("\n\t>> START!")
-
     while True:
         alarmOn = False
 
