@@ -19,7 +19,8 @@ class SecuriPi:
         if not self._button_lock:
             self._button_lock = True
             # ------------------------
-            if not self.token_callback():
+            func = self.token_callback
+            if not func():
                 self.bad_token()
             else:
             # ------------------------
