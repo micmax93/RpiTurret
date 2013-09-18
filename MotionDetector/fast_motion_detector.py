@@ -8,7 +8,7 @@ class FastMovementDetector:
     current = None
     lastTime = None
     startTime = None
-    threshold = 5
+    threshold = 20
     motionFactor = 0
 
     def __init__(self):
