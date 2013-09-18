@@ -8,7 +8,7 @@ class FastMovementDetector:
     current = None
     lastTime = None
     startTime = None
-    threshold = 20
+    threshold = 8
     motionFactor = 0
     actualAvgDiff = 0
 
