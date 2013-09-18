@@ -26,7 +26,7 @@ try:
         if fmd.motionFactor > 30:
             alarmOn = True
 
-        print (str(time.time()) + " " + fmd.motionFactor)
+        print (str(time.time()) + " " + str(fmd.motionFactor))
 
         s.update(alarm=alarmOn, mov_lvl=fmd.motionFactor, noise_lvl=0)
 except KeyboardInterrupt:
