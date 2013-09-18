@@ -1,6 +1,7 @@
 from RpiPinout.securipi import SecuriPi
 import UsbToken.validation as token
 from MotionDetector.fast_motion_detector import FastMovementDetector
+import time
 
 s = SecuriPi()
 s.setup()
@@ -8,12 +9,14 @@ s.token_callback = token.is_valid_token
 
 fmd = FastMovementDetector()
 
+startTime = time.time()
+
 try:
 
-    for i in range(100):
-        fmd.tryToDetect()
+    while time.time() - startTime < 5:
+        pass
 
-    print(">> START!")
+    print("\n\t>> START!")
 
     while True:
         alarmOn = False
