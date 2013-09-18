@@ -42,7 +42,7 @@ class FastMovementDetector:
             self.previous = cv.CloneImage(self.current)
             self.lastTime = time.time()
 
-            self.motionFactor = self.getMotionFactor(avg)
-            self.actualAvgDiff = avg
+            self.motionFactor = self.getMotionFactor(avg[0])
+            self.actualAvgDiff = avg[0]
         else:
             self.getFrame()
