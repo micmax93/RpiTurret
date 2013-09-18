@@ -41,9 +41,9 @@ class Host:
     noise = Accumulator(10)
     update_callback = empty_callback
 
-    def __init__(self, port):
+    def __init__(self, host, port):
         self.socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        self.socket.bind(('127.0.0.1', port))
+        self.socket.bind((host, port))
         self.socket.listen(10)
 
     def client_loop(self, conn, addr):

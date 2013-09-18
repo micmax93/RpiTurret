@@ -4,7 +4,7 @@ from MotionDetector.main import MotionDetector
 from threading import Thread
 import time
 
-c = Client('192.168.1.12', 5555)
+c = Client('192.168.1.101', 5555)
 
 n = NoiseDetect()
 n.noise_callback = c.update_noise
