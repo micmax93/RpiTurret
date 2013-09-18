@@ -3,7 +3,7 @@ import pygame.mixer as playback
 import RPI_GPIO as rpin
 
 
-def _dummy_token():
+def _dummy_token(self):
     return True
 
 
