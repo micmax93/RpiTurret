@@ -49,10 +49,9 @@ class SecuriPi:
         rpin.write('D_DISARMED', False)
 
     def trigger_alarm(self):
-        if not self.is_alarm:
-            self.is_alarm = True
-            rpin.write('D_ALARM', True)
-            playback.music.play(-1)
+        self.is_alarm = True
+        rpin.write('D_ALARM', True)
+        playback.music.play(-1)
 
     def stop_alarm(self):
         self.is_alarm = False
@@ -103,7 +102,7 @@ class SecuriPi:
         rpin.pwm_set('PWM_NOISE', duty_cycle=self.noise_lvl)
 
     def update(self, alarm, mov_lvl, noise_lvl):
-        if alarm and self.is_armed:
+        if alarm and self.is_armed and (not self.is_alarm):
             self.trigger_alarm()
         self.move_lvl = mov_lvl
         self.noise_lvl = noise_lvl

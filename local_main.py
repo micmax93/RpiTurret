@@ -13,6 +13,8 @@ try:
     for i in range(100):
         fmd.tryToDetect()
 
+    print(">> START!")
+
     while True:
         alarmOn = False
 
