@@ -16,10 +16,11 @@ class SecuriPi:
     token_callback = _dummy_token
 
     def button_pressed(self, channel):
-        if self._button_lock:
+        if not self._button_lock:
             self._button_lock = True
             # ------------------------
-            if not self.token_callback():
+            func = self.token_callback
+            if not func():
                 self.bad_token()
             else:
             # ------------------------
@@ -41,11 +42,11 @@ class SecuriPi:
 
     def lock_timeout(self):
         for t in range(10, 0, -1):
-            rpin.write('D_TOKEN', True)
+            rpin.write('D_DISARMED', True)
             time.sleep(t / 100)
-            rpin.write('D_TOKEN', False)
+            rpin.write('D_DISARMED', False)
             time.sleep(t / 100)
-        rpin.write('D_TOKEN', False)
+        rpin.write('D_DISARMED', False)
 
     def trigger_alarm(self):
         self.is_alarm = True
