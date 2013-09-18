@@ -10,7 +10,7 @@ fmd = FastMovementDetector()
 
 try:
 
-    for i in range(5):
+    for i in range(100):
         fmd.tryToDetect()
 
     while True:
