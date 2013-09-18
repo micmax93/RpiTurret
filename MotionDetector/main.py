@@ -5,7 +5,7 @@ import time
 class TimeUtil:
     @staticmethod
     def getCurrentTime():
-        return int(round(time.time() * 1000))
+        return int(time.time() * 1000)
 
 
 class Main:
@@ -13,19 +13,10 @@ class Main:
     referencedImage = None
     capture = None
     frameSize = None
-    #windowNameDiff = "Camera capture diff"
-    #windowNameReference = "Camera capture reference"
-    #windowCurrent = "Camera capture current"
 
     def __init__(self):
         #init camera
         self.capture = cv.CaptureFromCAM(0)
-        # cv.NamedWindow(self.windowNameReference, 1)
-        # cv.NamedWindow(self.windowCurrent, 1)
-        # cv.NamedWindow(self.windowNameDiff, 1)
-        # cv.MoveWindow(self.windowNameReference, 50, 50)
-        # cv.MoveWindow(self.windowCurrent, 500, 600)
-        # cv.MoveWindow(self.windowNameDiff, 1000, 50)
         self.captureReferenceImage()
 
     def getFrame(self):
@@ -40,9 +31,12 @@ class Main:
 
     def run(self):
 
-        while True:
+        for i in range(500):
+            time.sleep(1)
+
             currentFrame = self.getFrame()
 
+            # if i % 2 == 0:
             if self.isReferenceUpdateTime():
                 self.captureReferenceImage()
 
@@ -50,18 +44,9 @@ class Main:
             motionDetected = self.isMotionDetected(diff)
             print motionDetected
 
-            # cv.ShowImage(self.windowCurrent, currentFrame)
-            # cv.ShowImage(self.windowNameReference, self.referencedImage)
-            # cv.ShowImage(self.windowNameDiff, diff)
-
-            # Listen for ESC key
-            c = cv.WaitKey(7) % 0x100
-            if c == 27:
-                break
-
     def isReferenceUpdateTime(self):
         #capture reference img every 5 secs
-        return TimeUtil.getCurrentTime() - self.lastReferenceCaptureTime > 500
+        return TimeUtil.getCurrentTime() - self.lastReferenceCaptureTime > 1
 
     def getDiff(self, frame):
         diffImg = cv.CloneImage(self.referencedImage)
@@ -83,8 +68,7 @@ class Main:
         avg = cv.Avg(diff)
         #it's grey so we only need first channel
         #return avg[0]
-        return avg[0] > 0.25
-
+        return avg[0] > 20
 
 if __name__ == "__main__":
     t = Main()

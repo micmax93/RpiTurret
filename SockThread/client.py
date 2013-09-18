@@ -17,7 +17,7 @@ class Client:
         self.socket.close()
 
 
-c = Client('127.0.0.1', 5555)
+c = Client('192.168.1.101', 5555)
 c.send(15, 23)
 time.sleep(1)
 c.send(45, 66)

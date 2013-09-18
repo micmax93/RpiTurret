@@ -1,6 +1,8 @@
-import RPi.GPIO as GPIO
-from config import *
 import atexit
+
+import RPi.GPIO as GPIO
+from RpiPinout.config import *
+
 
 _input_mapping = {}
 _output_mapping = {}
