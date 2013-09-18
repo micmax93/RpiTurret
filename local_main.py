@@ -14,7 +14,7 @@ startTime = time.time()
 try:
 
     while time.time() - startTime < 5:
-        pass
+        fmd.tryToDetect()
 
     print("\n\t>> START!")
 
@@ -25,6 +25,8 @@ try:
 
         if fmd.motionFactor > 30:
             alarmOn = True
+
+        print (str(time.time()) + " " + fmd.motionFactor)
 
         s.update(alarm=alarmOn, mov_lvl=fmd.motionFactor, noise_lvl=0)
 except KeyboardInterrupt:
